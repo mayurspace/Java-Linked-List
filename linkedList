@@ -1,40 +1,134 @@
-class LL{
+class LL {
 
-Node head;
+    Node head;
 
-class Node{
+    class  Node{
 
-int data;
-Node next;
+        int data;
+        Node next;
 
-Node(int data){
+        Node(int data){
+            this.data = data;
+            this.next = null;
+        }
 
-this.data = data;
-this.next = null;
-}
-}
+    }
+
+    public void addFirst(int data){
+
+        Node newNode = new Node(data);
+
+        if(head == null){
+            head = newNode;
+            return;
+        }
+
+        newNode.next= head;
+        head = newNode;
+
+    }
+
+    public void addLast(int data){
+
+        Node newNode = new Node(data);
+        if(head == null || head.next == null){
+            head = newNode;
+        }
+
+        Node currNode = head;
+
+        while (currNode.next!=null){
+
+            currNode=currNode.next;
+
+        }
+        currNode.next = newNode;
 
 
-public void addFirst(int data){
+    }
 
-Node newNode = new Node(data);
+    public void delFirst(){
 
-if(head == null){
-head = newNode;
-}
+        if(head ==null){
+            return;
+        }
 
-newNode.next = head;
+        head = head.next;
 
-head = newNode;
+    }
 
-}
-
-public static void main(String args[]){
-
-LL list = new LL();
+    public  void  delLast(){
 
 
-}
+        if(head == null){
+            return;
+        }
 
+        Node currNode = head;
 
+        while (currNode.next.next != null){
+
+            currNode = currNode.next;
+        }
+
+        currNode.next = null;
+
+    }
+    public void reverse(){
+        if(head == null){
+            return;
+        }
+
+        Node prevNode = head;
+        Node currNode = head.next;
+
+        while (currNode!=null){
+
+            Node nextNode = currNode.next;
+
+            currNode.next=prevNode;
+
+            //Update->
+
+            prevNode = currNode;
+            currNode=nextNode;
+        }
+
+        head.next  = null;
+        head =prevNode;
+    }
+
+    public  void  print(){
+
+        if(head == null){
+            System.out.print("List is Empty");
+        }
+
+        Node currNode = head;
+
+        while(currNode!=null){
+
+            System.out.print(currNode.data+"->");
+            currNode=currNode.next;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        LL list = new LL();
+
+        list.addFirst(12);
+        list.addFirst(13);
+        list.addFirst(14);
+        list.addFirst(15);
+        list.addFirst(16);
+        list.addLast(233);
+        list.delFirst();
+        list.delLast();
+        System.out.println("Normal List");
+        list.print();
+        System.out.println("Reversed List");
+        list.reverse();
+        list.print();
+    }
 }
